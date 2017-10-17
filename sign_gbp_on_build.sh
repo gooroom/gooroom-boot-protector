@@ -43,20 +43,12 @@ for pkg in "${pkgs[@]}"; do
   fi
 done
 
-GRUBX64=/boot/efi/EFI/gooroom/grubx64.efi
-VMLINUZ=/boot/vmlinuz-4.9.0-3-amd64
-INITRD=/boot/initrd.img-4.9.0-3-amd64
-GRUBCFG=/boot/grub/grub.cfg
+GRUBX64=./grubx64.efi
+GRUBCFG=./grub.cfg
 
 GPG_KEY_FILE=$KEY_PATH/gooroom-1.0-secret-key.gpg
 BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-keyring-1.0.gpg
 #BOOT_KEY_FILE=$KEY_PATH/boot.key
-
-#
-## Create /boot/efi/EFI and /boot/grub on the build server
-#
-if [ ! -e /boot/grub ]; then mkdir -p /boot/grub; fi
-if [ ! -e /boot/efi/EFI/gooroom ]; then mkdir -p /boot/efi/EFI/gooroom; fi
 
 #
 ## Create PK.auth, KEK.auth and db.auth
@@ -75,7 +67,7 @@ if [ ! -e ${KEY_PATH}/db.key -o ! -e ${KEY_PATH}/db.crt ]; then
            #db.auth  db.cer  db.crt  db.esl  db.key
 
     # Create PK.auth
-    echo -e ">>> create PK.auth"
+    echo -e ">>> create ${KEY_PATH}/PK.auth"
     openssl req -new -x509 -newkey rsa:2048 -subj "/CN=my PK/" \
 	        -keyout PK.key -out PK.crt -days 3650 -nodes -sha256
     openssl x509 -outform DER -in PK.crt -out PK.cer
@@ -83,7 +75,7 @@ if [ ! -e ${KEY_PATH}/db.key -o ! -e ${KEY_PATH}/db.crt ]; then
     sign-efi-sig-list -k PK.key -c PK.crt PK PK.esl ${KEY_PATH}/PK.auth
 
     # Create KEK.auth
-    echo -e ">>> create KEK.auth"
+    echo -e ">>> create ${KEY_PATH}/KEK.auth"
     openssl req -new -x509 -newkey rsa:2048 -subj "/CN=my KEK/" \
 	        -keyout KEK.key -out KEK.crt -days 3650 -nodes -sha256
     openssl x509 -outform DER -in KEK.crt -out KEK.cer
@@ -91,19 +83,13 @@ if [ ! -e ${KEY_PATH}/db.key -o ! -e ${KEY_PATH}/db.crt ]; then
     sign-efi-sig-list -k PK.key -c PK.crt KEK KEK.esl ${KEY_PATH}/KEK.auth
 
     # Create db.auth
-    echo -e ">>> create db.auth"
+    echo -e ">>> create ${KEY_PATH}/db.auth"
     openssl req -new -x509 -newkey rsa:2048 -subj "/CN=my db/" \
 	        -keyout db.key -out db.crt -days 3650 -nodes -sha256
     openssl x509 -outform DER -in db.crt -out db.cer
     cert-to-efi-sig-list -g `uuidgen` db.crt db.esl
     sign-efi-sig-list -k KEK.key -c KEK.crt db db.esl ${KEY_PATH}/db.auth
 fi
-
-echo -e "================================================"
-echo -e "### Importing ${GPG_KEY_FILE} with private key ####"
-echo -e "================================================"
-
-gpg --allow-secret-key-import --import $GPG_KEY_FILE
 
 echo -e "=============================================================="
 echo -e "### Create ${GRUBX64}.unsigned ####"
@@ -126,20 +112,11 @@ echo -e "================================================"
 echo -e "### Sign ${GRUBX64} ####"
 echo -e "================================================"
 
+# When the build is completed in the rules file, copy db.crt and db.key to $KEY_PATH ($key_path in rules)
 echo -e ">>> sbsign --key ${KEY_PATH}/db.key --cert ${KEY_PATH}/db.crt --output ${GRUBX64}.signed ${GRUBX64}.unsigned"
 sbsign --key ${KEY_PATH}/db.key --cert ${KEY_PATH}/db.crt --output ${GRUBX64}.signed ${GRUBX64}.unsigned
 
 cp ${GRUBX64}.signed ${GRUBX64}
-
-echo -e "================================================"
-echo -e "### Sign ${VMLINUZ} ####"
-echo -e "================================================"
-gpg -v --pgp6 --detach-sign ${VMLINUZ}
-
-echo -e "================================================"
-echo -e "### Sign ${INITRD} ####"
-echo -e "================================================"
-gpg -v --pgp6 --detach-sign ${INITRD}
 
 echo -e "================================================"
 echo -e "### Create ${GRUBCFG} ###"
@@ -150,21 +127,7 @@ if [ -e /etc/gooroom/adjustments/gooroom-adjustments-grub.execute ]; then
   /etc/gooroom/adjustments/gooroom-adjustments-grub.execute
 fi
 
-## grub.cfg
-#grub-mkconfig -o ${GRUBCFG}
-
+## update grub.cfg
 sed -i -e 's@\/usr\/share\/plymouth\/themes\/gooroom@\(memdisk\)\/themes\/background@g' ${GRUBCFG}
 sed -i -e 's@font=\"\/usr\/share\/grub/unicode.pf2\"@font=\"\(memdisk\)\/boot\/grub\/fonts\/unicode.pf2\"@g' ${GRUBCFG}
 
-echo -e "================================================"
-echo -e "### Sign ${GRUBCFG} ####"
-echo -e "================================================"
-gpg -v --pgp6 --detach-sign ${GRUBCFG}
-
-
-echo -e "================================================"
-echo -e "### Sign ${KEY_PATH}/db.auth ####"
-echo -e "================================================"
-dd bs=1 skip=1425 if=${KEY_PATH}/db.auth of=tmp_dbdata
-gpg --output ${KEY_PATH}/db.sig  --detach-sign tmp_dbdata
-rm tmp_dbdata

@@ -3,58 +3,77 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
-src_url=172.16.195.110
-src_codename = $(shell LC_ALL=C dpkg-parsechangelog | grep ^Distribution: | cut -d ' ' -f 2)
-src_version = 4.9.30-2+deb9u3+grm1u1
-src_abi=4.9.0-3
-
-targetdir=/debian/gooroom-boot-protector
+kernel_abi=4.9.0-3
+jenkins_dir=build_gbpdir
+key_path=/var/lib/jenkins/$(jenkins_dir)
+target_dir=/debian/gooroom-boot-protector
+build_dir=$(CURDIR)
 
 %:
 	dh $@
 
 override_dh_auto_build:
-	# vmlinuz initrd.img
-	wget -d --timestamping http://$(src_url)/secureboot/$(src_codename)/$(src_version)/initrd.img-$(src_abi)-amd64
-	mv initrd.img-$(src_abi)-amd64 /boot
-	wget -d --timestamping http://$(src_url)/secureboot/$(src_codename)/$(src_version)/vmlinuz-$(src_abi)-amd64
-	mv vmlinuz-$(src_abi)-amd64 /boot
-
 	# grub.cfg
-	cp $(CURDIR)/data/grub.cfg /boot/grub/
+	cp $(build_dir)/data/grub.cfg $(build_dir)/grub.cfg
 
 	# import keys
+	gpg --homedir=$(build_dir) --allow-secret-key-import --import $(key_path)/gooroom-1.0-secret-key.gpg
+
 	set -e ; \
-	if [ -e /var/lib/jenkins/keys ]; then \
-		./sign_gbp_on_build.sh /var/lib/jenkins/keys; \
+	if [ -e $(key_path) ]; then \
+		./sign_gbp_on_build.sh $(key_path); \
 	else \
 		./sign_gbp_on_build.sh; \
 	fi
 
+	# cp kernel and initrd.img
+	cp $(key_path)/vmlinuz-$(kernel_abi)-amd64 $(build_dir)/vmlinuz-$(kernel_abi)-amd64
+	cp $(key_path)/initrd.img-$(kernel_abi)-amd64 $(build_dir)/initrd.img-$(kernel_abi)-amd64
+
+	# gpg signing
+	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/vmlinuz-$(kernel_abi)-amd64
+	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/initrd.img-$(kernel_abi)-amd64
+	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/grub.cfg
+
+	# create db.sig from db.auth
+	dd bs=1 skip=1425 if=$(key_path)/db.auth of=$(build_dir)/tmp_dbdata
+	gpg --homedir=$(build_dir) -v --output $(build_dir)/db.sig --detach-sign $(build_dir)/tmp_dbdata
+	rm $(build_dir)/tmp_dbdata
+
 override_dh_install:
 	dh_install
 
-	mkdir -p $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	mkdir -p $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
 	# grub.cfg
-	cp /boot/grub/grub.cfg $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
-	cp /boot/grub/grub.cfg.sig $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/grub.cfg $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/grub.cfg.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
 	# gbp-daemon
-	cp $(CURDIR)/data/gbp-daemon $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/data/gbp-daemon $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
 	# auth key
-	cp $(CURDIR)/PK.auth $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
-	cp $(CURDIR)/KEK.auth $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
-	cp $(CURDIR)/db.auth $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(key_path)/PK.auth $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(key_path)/KEK.auth $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(key_path)/db.auth $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
 	# db.sig
-	cp $(CURDIR)/db.sig $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/db.sig $(key_path)/
+	cp $(build_dir)/db.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
 	# grubx64.efi
-	cp /boot/efi/EFI/gooroom/grubx64.efi $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/grubx64.efi $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
 	# kernel and initrd.img
-	cp /boot/vmlinuz-4.9.0-3-amd64.sig $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
-	cp /boot/initrd.img-4.9.0-3-amd64 $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
-	cp /boot/initrd.img-4.9.0-3-amd64.sig $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/vmlinuz-$(kernel_abi)-amd64.sig $(key_path)/
+	cp $(build_dir)/vmlinuz-$(kernel_abi)-amd64.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64 $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64.sig $(key_path)/
+	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	# backup db.key and db.crt
+	if [ ! -e $(key_path)/db.key -o ! -e $(key_path)/db.crt ]; then \
+		cp $(build_dir)/db.key $(key_path)/ ; \
+		cp $(build_dir)/db.crt $(key_path)/ ; \
+	fi

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Install daemon
+cp /usr/share/gooroom/security/gooroom-boot-protector/gbp-daemon /etc/init.d
+update-rc.d gbp-daemon defaults
+
+# Update key files
+cp /usr/share/gooroom/security/gooroom-boot-protector/KEK.auth /boot/efi/EFI
+cp /usr/share/gooroom/security/gooroom-boot-protector/PK.auth /boot/efi/EFI
+cp /usr/share/gooroom/security/gooroom-boot-protector/db.auth /boot/efi/EFI
+
+cp /usr/share/gooroom/security/gooroom-boot-protector/grubx64.efi /boot/efi/EFI/gooroom
+
+cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg /boot/grub
+cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.sig /boot/grub
+
+cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-* /boot/
+cp /usr/share/gooroom/security/gooroom-boot-protector/vmlinuz-* /boot/

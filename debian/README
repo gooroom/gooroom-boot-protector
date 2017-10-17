@@ -1,0 +1,6 @@
+The Debian Package gooroom-boot-protector
+----------------------------
+
+Gooroom Platform boot protection for secureboot and grub signature verification
+
+ -- jongkyung.woo <jkwoo@gooroom.kr>  Thu, 12 Oct 2017 10:10:47 +0900

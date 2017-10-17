@@ -1,0 +1,15 @@
+Source: gooroom-boot-protector
+Section: utils
+Priority: optional
+Maintainer: gooroom <gooroom@gooroom.kr>
+Build-Depends: debhelper (>= 9), wget, gnupg, openssl, sbsigntool,
+ uuid-runtime, efitools, gooroom-archive-keyring, gooroom-grub-efi-amd64-bin
+Standards-Version: 3.9.8
+Homepage: http://www.gooroom.kr
+Vcs-Git: https://git.gooroom.kr/gooroom-boot-protector.git
+
+Package: gooroom-boot-protector
+Architecture: amd64
+Depends: gooroom-grub-common, gooroom-grub-efi-amd64, gooroom-grub2-common
+Description: Gooroom Platforom boot protection
+ Gooroom Platform boot protection for secureboot and grub signature verification

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+rm /boot/efi/EFI/KEK.auth
+rm /boot/efi/EFI/PK.auth
+rm /boot/efi/EFI/db.auth
+
+#rm /boot/efi/EFI/gooroom/grubx64.efi
+#rm /boot/grub/grub.cfg
+
+rm /boot/grub/grub.cfg.sig
+
+rm /boot/initrd.img-*-amd64.sig
+rm /boot/vmlinuz-*-amd64.sig

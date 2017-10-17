@@ -1,0 +1,53 @@
+#!/usr/bin/make -f
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#export DH_VERBOSE = 1
+
+src_url=172.16.195.110
+src_codename = $(shell LC_ALL=C dpkg-parsechangelog | grep ^Distribution: | cut -d ' ' -f 2)
+src_version = 4.9.30-2+deb9u3+grm1u1
+src_abi=4.9.0-3
+
+targetdir=/debian/gooroom-boot-protector
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	# vmlinuz initrd.img
+	wget -d --timestamping http://$(src_url)/secureboot/$(src_codename)/$(src_version)/initrd.img-$(src_abi)-amd64
+	mv initrd.img-$(src_abi)-amd64 /boot
+	wget -d --timestamping http://$(src_url)/secureboot/$(src_codename)/$(src_version)/vmlinuz-$(src_abi)-amd64
+	mv vmlinuz-$(src_abi)-amd64 /boot
+
+	# grub.cfg
+	cp $(CURDIR)/data/grub.cfg /boot/grub/
+	./sign_gbp_on_build.sh
+
+override_dh_install:
+	dh_install
+
+	mkdir -p $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	# grub.cfg
+	cp /boot/grub/grub.cfg $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp /boot/grub/grub.cfg.sig $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	# gbp-daemon
+	cp $(CURDIR)/data/gbp-daemon $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	# auth key
+	cp $(CURDIR)/PK.auth $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(CURDIR)/KEK.auth $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(CURDIR)/db.auth $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	# db.sig
+	cp $(CURDIR)/db.sig $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	# grubx64.efi
+	cp /boot/efi/EFI/gooroom/grubx64.efi $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	# kernel and initrd.img
+	cp /boot/vmlinuz-4.9.0-3-amd64.sig $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp /boot/initrd.img-4.9.0-3-amd64 $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp /boot/initrd.img-4.9.0-3-amd64.sig $(CURDIR)$(targetdir)/usr/share/gooroom/security/gooroom-boot-protector/

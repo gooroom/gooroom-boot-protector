@@ -22,7 +22,14 @@ override_dh_auto_build:
 
 	# grub.cfg
 	cp $(CURDIR)/data/grub.cfg /boot/grub/
-	./sign_gbp_on_build.sh
+
+	# import keys
+	set -e ; \
+	if [ -e /var/lib/jenkins/keys ]; then \
+		./sign_gbp_on_build.sh /var/lib/jenkins/keys; \
+	else \
+		./sign_gbp_on_build.sh; \
+	fi
 
 override_dh_install:
 	dh_install

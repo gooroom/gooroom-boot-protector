@@ -4,7 +4,7 @@
 #export DH_VERBOSE = 1
 
 kernel_abi=4.9.0-3
-jenkins_dir=build_gbpdir
+jenkins_dir=build_keystore/boot-protector
 key_path=/var/lib/jenkins/$(jenkins_dir)
 target_dir=/debian/gooroom-boot-protector
 build_dir=$(CURDIR)
@@ -15,6 +15,7 @@ build_dir=$(CURDIR)
 override_dh_auto_build:
 	# grub.cfg
 	cp $(build_dir)/data/grub.cfg $(build_dir)/grub.cfg
+	cp $(build_dir)/data/grub.cfg.ima $(build_dir)/grub.cfg.ima
 
 	# import keys
 	gpg --homedir=$(build_dir) --allow-secret-key-import --import $(key_path)/gooroom-1.0-secret-key.gpg
@@ -34,6 +35,7 @@ override_dh_auto_build:
 	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/vmlinuz-$(kernel_abi)-amd64
 	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/initrd.img-$(kernel_abi)-amd64
 	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/grub.cfg
+	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/grub.cfg.ima
 
 	# create db.sig from db.auth
 	dd bs=1 skip=1425 if=$(key_path)/db.auth of=$(build_dir)/tmp_dbdata
@@ -45,9 +47,13 @@ override_dh_install:
 
 	mkdir -p $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
-	# grub.cfg
+	# grub.cfg (ima=off)
 	cp $(build_dir)/grub.cfg $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 	cp $(build_dir)/grub.cfg.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	# grub.cfg.ima (ima_appraise=enforce)
+	cp $(build_dir)/grub.cfg.ima $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/grub.cfg.ima.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
 	# gbp-daemon
 	cp $(build_dir)/data/gbp-daemon $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/

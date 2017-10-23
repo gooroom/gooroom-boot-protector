@@ -1,13 +1,18 @@
 #!/bin/sh
 
+# Uninstall daemon
+update-rc.d gbp-daemon remove
+rm /etc/init.d/gbp-daemon
+
+# Set update_initramfs to yes
+sed -i -e "s@update_initramfs=no@update_initramfs=yes@g" /etc/initramfs-tools/update-initramfs.conf
+
+# Clean secureboot key files
 rm /boot/efi/EFI/KEK.auth
 rm /boot/efi/EFI/PK.auth
 rm /boot/efi/EFI/db.auth
 
-#rm /boot/efi/EFI/gooroom/grubx64.efi
-#rm /boot/grub/grub.cfg
-
+# Clean sig files
 rm /boot/grub/grub.cfg.sig
-
 rm /boot/initrd.img-*-amd64.sig
 rm /boot/vmlinuz-*-amd64.sig

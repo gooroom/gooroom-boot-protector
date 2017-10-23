@@ -85,9 +85,9 @@ if [ ! -e ${KEY_PATH}/db.key -o ! -e ${KEY_PATH}/db.crt ]; then
     # Create db.auth
     echo -e ">>> create ${KEY_PATH}/db.auth"
     openssl req -new -x509 -newkey rsa:2048 -subj "/CN=my db/" \
-	        -keyout db.key -out db.crt -days 3650 -nodes -sha256
-    openssl x509 -outform DER -in db.crt -out db.cer
-    cert-to-efi-sig-list -g `uuidgen` db.crt db.esl
+	        -keyout ${KEY_PATH}/db.key -out ${KEY_PATH}/db.crt -days 3650 -nodes -sha256
+    openssl x509 -outform DER -in ${KEY_PATH}/db.crt -out db.cer
+    cert-to-efi-sig-list -g `uuidgen` ${KEY_PATH}/db.crt db.esl
     sign-efi-sig-list -k KEK.key -c KEK.crt db db.esl ${KEY_PATH}/db.auth
 fi
 

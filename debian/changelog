@@ -1,3 +1,16 @@
+gooroom-boot-protector (0.1.1+4.9.30~2+deb9u5+grm1u1) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [b0424b6d] Added to check the location of the build server's key directory
+  * [9daf060b] Fixed build errors on the build server
+  * [dec9c753] gooroom-exe-protector update to check when installing package
+  * [3b95742b] Released 4.9.30-2+deb9u5+grm1u1
+  * [f89e4748] Set the timeout to 5 and support GRM_RECOVERY mode
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 16 Nov 2017 17:49:25 +0900
+
 gooroom-boot-protector (0.1.0) gooroom-1.0; urgency=medium
 
   * Initial Release.

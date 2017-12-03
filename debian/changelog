@@ -1,3 +1,9 @@
+gooroom-boot-protector (0.1.1+4.9.30~2+deb9u5+grm1u2) gooroom-1.0; urgency=medium
+
+  * UNRELEASED
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Sun, 03 Dec 2017 09:35:32 +0900
+
 gooroom-boot-protector (0.1.1+4.9.30~2+deb9u5+grm1u1) gooroom-1.0; urgency=medium
 
   [ jongkyung.woo ]

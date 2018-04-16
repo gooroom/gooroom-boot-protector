@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.1.1+4.9.82~1+deb9u3+grm1u3) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [585a21ba] Remove pti=off at gooroom-os-protector 2.0.0 and later
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 16 Apr 2018 18:13:42 +0900
+
 gooroom-boot-protector (0.1.1+4.9.82~1+deb9u3+grm1u2) gooroom-1.0; urgency=medium
 
   [ jongkyung.woo ]

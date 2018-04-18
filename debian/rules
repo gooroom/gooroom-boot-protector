@@ -30,10 +30,14 @@ override_dh_auto_build:
 	# cp kernel and initrd.img
 	cp $(key_path)/vmlinuz-$(kernel_abi)-amd64 $(build_dir)/vmlinuz-$(kernel_abi)-amd64
 	cp $(key_path)/initrd.img-$(kernel_abi)-amd64 $(build_dir)/initrd.img-$(kernel_abi)-amd64
+	cp $(key_path)/initrd.img-$(kernel_abi)-amd64-recovery \
+	   $(build_dir)/initrd.img-$(kernel_abi)-amd64-recovery
 
 	# gpg signing
 	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/vmlinuz-$(kernel_abi)-amd64
 	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/initrd.img-$(kernel_abi)-amd64
+	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/initrd.img-$(kernel_abi)-amd64-recovery
+
 	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/grub.cfg
 	gpg --homedir=$(build_dir) -v --pgp6 --detach-sign $(build_dir)/grub.cfg.ima
 
@@ -71,12 +75,22 @@ override_dh_install:
 	cp $(build_dir)/grubx64.efi $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
 	# kernel and initrd.img
-	cp $(build_dir)/vmlinuz-$(kernel_abi)-amd64.sig $(key_path)/
-	cp $(build_dir)/vmlinuz-$(kernel_abi)-amd64.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/vmlinuz-$(kernel_abi)-amd64.sig \
+	   $(key_path)/
+	cp $(build_dir)/vmlinuz-$(kernel_abi)-amd64.sig \
+	   $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
-	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64 $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64 \
+	   $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64.sig $(key_path)/
-	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64.sig \
+	   $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64-recovery \
+	   $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64-recovery.sig $(key_path)/
+	cp $(build_dir)/initrd.img-$(kernel_abi)-amd64-recovery.sig \
+	   $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
 	# backup db.key and db.crt
 	if [ ! -e $(key_path)/db.key -o ! -e $(key_path)/db.crt ]; then \

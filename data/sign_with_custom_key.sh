@@ -44,6 +44,7 @@ done
 GRUBX64=/boot/efi/EFI/gooroom/grubx64.efi
 VMLINUZ=/boot/vmlinuz-4.9.0-6-amd64
 INITRD=/boot/initrd.img-4.9.0-6-amd64
+INITRD_RECOVERY=/boot/initrd.img-4.9.0-6-amd64-recovery
 GRUBCFG=/boot/grub/grub.cfg
 
 GPG_KEY_FILE=$KEY_PATH/gooroom-1.0-secret-key.gpg
@@ -157,6 +158,11 @@ echo -e "================================================"
 echo -e "### Sign ${INITRD} ####"
 echo -e "================================================"
 gpg -v --pgp6 --detach-sign ${INITRD}
+
+echo -e "================================================"
+echo -e "### Sign ${INITRD_RECOVERY} ####"
+echo -e "================================================"
+gpg -v --pgp6 --detach-sign ${INITRD_RECOVERY}
 
 echo -e "================================================"
 echo -e "### Create ${GRUBCFG} ###"

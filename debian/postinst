@@ -32,5 +32,15 @@ else
   cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.sig /boot/grub
 fi
 
-cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-* /boot/
 cp /usr/share/gooroom/security/gooroom-boot-protector/vmlinuz-* /boot/
+
+dpkg -l | grep gooroom-recovery-utils
+if [ $? -eq 0 ]; then
+  cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-*-amd64-recovery \
+     /boot/initrd.img-$(uname -r)
+  cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-*-amd64-recovery.sig \
+     /boot/initrd.img-$(uname -r).sig
+else
+  cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-*-amd64 /boot/
+  cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-*-amd64.sig /boot/
+fi

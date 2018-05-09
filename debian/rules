@@ -67,6 +67,11 @@ override_dh_install:
 	cp $(key_path)/KEK.auth $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 	cp $(key_path)/db.auth $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
+	# DER format key
+	cp $(key_path)/PK.cer $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(key_path)/KEK.cer $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(key_path)/db.cer $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+
 	# db.sig
 	cp $(build_dir)/db.sig $(key_path)/
 	cp $(build_dir)/db.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/

@@ -98,7 +98,7 @@ echo -e "=============================================================="
 # Create ./.grubx64.efi
 grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \
                   --output ${GRUBX64}.unsigned \
-                  --fonts="unicode" \
+                  --fonts="/boot/grub/fonts/gooroom-font.pf2" \
                   --format x86_64-efi \
                   --pubkey ${BOOT_KEY_FILE} \
                   --install-modules="" \
@@ -106,6 +106,7 @@ grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \
                     "themes/background/gooroom_bg_17_logo.png=/usr/lib/grub/x86_64-efi/themes/background/gooroom_bg_17_logo.png" \
                     "themes/warningimages/verified_boot_fail.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_fail.png" \
                     "themes/warningimages/verified_boot_config_error.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_config_error.png" \
+                    "boot/grub/fonts/gooroom-font.pf2=/boot/grub/fonts/gooroom-font.pf2" \
                     "boot/grub/grub.cfg=/usr/lib/grub/x86_64-efi/grubconf/embedded.cfg"
 
 echo -e "================================================"

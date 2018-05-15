@@ -3,7 +3,9 @@ Section: utils
 Priority: optional
 Maintainer: gooroom <gooroom@gooroom.kr>
 Build-Depends: debhelper (>= 9), wget, gnupg, openssl, sbsigntool,
- uuid-runtime, efitools, gooroom-archive-keyring, gooroom-grub-efi-amd64-bin
+ uuid-runtime, efitools, gooroom-archive-keyring, gooroom-grub-efi-amd64-bin,
+# /boot/grub/fonts/gooroom-font.pf2
+ systemd, fonts-naver-d2coding, debian-system-adjustments, 
 Standards-Version: 3.9.8
 Homepage: http://www.gooroom.kr
 Vcs-Git: https://git.gooroom.kr/gooroom-boot-protector.git

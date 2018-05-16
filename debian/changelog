@@ -1,3 +1,13 @@
+gooroom-boot-protector (0.2.1+4.9.82~1+deb9u3+grm1u2) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [f38af867] Supported Korean fonts (gooroom-font.pf2) in gooroom-grub menu
+  * [a876cbae] Updated initrd.img-4.9.0-6-amd64 on NT500R3W-LD2A
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 16 May 2018 11:37:52 +0900
+
 gooroom-boot-protector (0.2.1+4.9.82~1+deb9u3+grm1u1) gooroom-1.0; urgency=medium
 
   [ jongkyung.woo ]

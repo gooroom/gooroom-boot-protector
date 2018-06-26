@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.2.1+4.9.82~1+deb9u3+grm1u3) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [21e6b275] Updated initrd.img-4.9.0-6-amd64 on DELL E5470
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Tue, 26 Jun 2018 20:00:31 +0900
+
 gooroom-boot-protector (0.2.1+4.9.82~1+deb9u3+grm1u2) gooroom-1.0; urgency=medium
 
   [ jongkyung.woo ]

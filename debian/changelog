@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.2.1+4.9.110~3+deb9u4+grm1u1) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [3f533ef6] Updated kernel 4.9.0-8-amd64 and 4.9.110-3+deb9u4+grm1u1
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 19 Sep 2018 18:13:45 +0900
+
 gooroom-boot-protector (0.2.1+4.9.82~1+deb9u3+grm1u4) gooroom-1.0; urgency=medium
 
   [ jongkyung.woo ]

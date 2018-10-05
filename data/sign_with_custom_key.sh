@@ -134,7 +134,7 @@ grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \
                   --format x86_64-efi \
                   --pubkey ${BOOT_KEY_FILE} \
                   --install-modules="" \
-                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search lvm help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi tpm verify gcry_rsa test echo zfs xfs ufs2 ufs1_be ufs1 udf squash4 sfs romfs reiserfs odc ntfs nilfs2 newc minix_be minix3_be minix3 minix2_be minix2 minix jfs iso9660 hfsplus hfs exfat cpio_be cpio cbfs bfs afs affs" \
+                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search lvm help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi tpm verify gcry_rsa test echo zfs xfs ufs2 ufs1_be ufs1 udf squash4 sfs romfs reiserfs odc ntfs nilfs2 newc minix_be minix3_be minix3 minix2_be minix2 minix jfs iso9660 hfsplus hfs exfat cpio_be cpio cbfs bfs afs affs crypto gcry_sha256 gcry_sha512" \
                     "themes/background/gooroom_bg_17_logo.png=/usr/lib/grub/x86_64-efi/themes/background/gooroom_bg_17_logo.png" \
                     "themes/warningimages/verified_boot_fail.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_fail.png" \
                     "themes/warningimages/verified_boot_config_error.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_config_error.png" \
@@ -153,17 +153,17 @@ cp ${GRUBX64}.signed ${GRUBX64}
 echo -e "================================================"
 echo -e "### Sign ${VMLINUZ} ####"
 echo -e "================================================"
-gpg -v --pgp6 --detach-sign ${VMLINUZ}
+gpg -v --digest-algo sha256 --detach-sign ${VMLINUZ}
 
 echo -e "================================================"
 echo -e "### Sign ${INITRD} ####"
 echo -e "================================================"
-gpg -v --pgp6 --detach-sign ${INITRD}
+gpg -v --digest-algo sha256 --detach-sign ${INITRD}
 
 echo -e "================================================"
 echo -e "### Sign ${INITRD_RECOVERY} ####"
 echo -e "================================================"
-gpg -v --pgp6 --detach-sign ${INITRD_RECOVERY}
+gpg -v --digest-algo sha256 --detach-sign ${INITRD_RECOVERY}
 
 echo -e "================================================"
 echo -e "### Create ${GRUBCFG} ###"
@@ -183,5 +183,5 @@ sed -i -e 's@font=\"\/usr\/share\/grub/unicode.pf2\"@font=\"\(memdisk\)\/boot\/g
 echo -e "================================================"
 echo -e "### Sign ${GRUBCFG} ####"
 echo -e "================================================"
-gpg -v --pgp6 --detach-sign ${GRUBCFG}
+gpg -v --digest-algo sha256 --detach-sign ${GRUBCFG}
 

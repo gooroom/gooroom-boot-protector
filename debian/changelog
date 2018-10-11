@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.3.1+4.9.110~3+deb9u4+grm1u1) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [cab54980] Modified sign algorithm to sha256
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 11 Oct 2018 12:11:06 +0900
+
 gooroom-boot-protector (0.2.1+4.9.110~3+deb9u4+grm1u1) gooroom-1.0; urgency=medium
 
   [ jongkyung.woo ]

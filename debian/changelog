@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.3.1+4.9.110~3+deb9u4+grm1u2) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [656d9138] Rebuild on gooroom-grub 2.02~beta3-5+grm1u6
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 12 Oct 2018 19:11:58 +0900
+
 gooroom-boot-protector (0.3.1+4.9.110~3+deb9u4+grm1u1) gooroom-1.0; urgency=medium
 
   [ jongkyung.woo ]

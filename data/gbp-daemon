@@ -24,39 +24,49 @@ MODULES=""
 
 # Get lsb functions
 . /lib/lsb/init-functions
-ret_value_of_check=
+ret_value_of_check=0
 
+# Write the syslog message
+#  $1 - Message
+#  $2 - Error code
+#  $3 - Priority
+out_log()
+{
+    /usr/bin/python3 -c "from systemd import journal;journal.send('$TAG_NAME: $1', SYSLOG_IDENTIFIER='$SERVICE_NAME', GRMCODE='$2', PRIORITY=$3)"
+}
+
+# Check status of security service
 check() {
-	# Signature file 검사
+	# Check signature file.
 	if [ ! -f $SIG_PATH ]; then
 		log_action_msg "$TAG_NAME:" "$SERVICE_NAME inactive"
-		ret_value_of_check="-1"
+		ret_value_of_check=-1
 		return 0
 	fi
 
-	# UEFI Secure Boot 설정 플래그 검사
+	# Check UEFI secure boot flag.
 	sb_file=$(find /sys/firmware/efi/efivars -name 'SecureBoot\-*')
 	sb_enabled=$(tail --byte=1 $sb_file | od -An -t u1)
 
 	if [ $sb_enabled -eq 0 ]; then
 		log_action_msg "$TAG_NAME:" "$SERVICE_NAME inactive"
-		ret_value_of_check="-1"
+		ret_value_of_check=-1
 		return 0
 	fi
 
-	# UEFI Secure Boot DB key 검사
+	# Check UEFI secure boot DB key.
 	dbdata_file=$(find /sys/firmware/efi/efivars -name 'db\-*')
 
 	if [ ! -f $dbdata_file ]; then
 		log_action_msg "$TAG_NAME:" "$SERVICE_NAME inactive"
-		ret_value_of_check="-1"
+		ret_value_of_check=-1
 		return 0
 	fi
 
 	log_action_msg "$TAG_NAME:" "$SERVICE_NAME active"
-	ret_value_of_check="0"
+	ret_value_of_check=0
 
-	## 처음 4바이트 속성값은 제외함
+	## Skip first 4 bytes to compare a DB key.
 	#dd if=$dbdata_file bs=1 skip=4 > $TEMP_DB_PATH 2>/dev/null
 	#(set +e; gpg --verify $SIG_PATH $TEMP_DB_PATH 2>/dev/null)
 	#if [ $? -eq 0 ]; then
@@ -67,25 +77,31 @@ check() {
 	#	ret_value_of_check="-1"
 	#fi
 
-	# DB key 삭제
+	# Delete DB key.
 	#rm $TEMP_DB_PATH
 
 	return 0
 }
 
-# 부팅 보호 서비스
+# Boot protector service main
 case "$1" in
 	start)
 		log_daemon_msg "$TAG_NAME" "Start Gooroom Boot Protector service"
 		log_end_msg 0
 		check
-		logger --id=$$ -p 3 -t $SERVICE_NAME "$TAG_NAME: errorcode=$ret_value_of_check"
+
+        if [ $ret_value_of_check -eq 0 ]; then
+            out_log "started successfully" "010001" 6
+        else
+            out_log "failed to start" "010003" 3
+        fi
 	;;
 
 	stop)
 		log_daemon_msg "$TAG_NAME" "Stop Gooroom Boot Protector service"
 		log_end_msg 0
-		logger --id=$$ -p 3 -t $SERVICE_NAME "$TAG_NAME: errorcode=1"
+
+		out_log "stoped successfully" "010002" 6
 	;;
 
 	enable-autostart)

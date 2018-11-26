@@ -13,6 +13,6 @@ Vcs-Git: https://git.gooroom.kr/gooroom-boot-protector.git
 Package: gooroom-boot-protector
 Architecture: amd64
 Depends: gooroom-grub-common, gooroom-grub-efi-amd64, gooroom-grub2-common,
- linux-image-4.9.0-8-amd64 (= 4.9.110-3+deb9u4+grm1u1)
+ linux-image-4.9.0-8-amd64 (= 4.9.110-3+deb9u6+grm1u2)
 Description: Gooroom Platforom boot protection
  Gooroom Platform boot protection for secureboot and grub signature verification

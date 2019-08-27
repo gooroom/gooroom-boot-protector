@@ -3,11 +3,13 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
-kernel_abi=4.9.0-9
-jenkins_dir=build_keystore/boot-protector
+kernel_abi=4.19.0-5
+gooroom_codename=gooroom-2.0
+jenkins_dir=build_keystore/$(gooroom_codename)/boot-protector
 key_path=/var/lib/jenkins/$(jenkins_dir)
 target_dir=/debian/gooroom-boot-protector
 build_dir=$(CURDIR)
+gpg_key=gooroom-2.0-secret-key.gpg
 
 %:
 	dh $@
@@ -18,7 +20,7 @@ override_dh_auto_build:
 	cp $(build_dir)/data/grub.cfg.ima $(build_dir)/grub.cfg.ima
 
 	# import keys
-	gpg --homedir=$(build_dir) --allow-secret-key-import --import $(key_path)/gooroom-1.0-secret-key.gpg
+	gpg --homedir=$(build_dir) --allow-secret-key-import --import $(key_path)/$(gpg_key)
 
 	set -e ; \
 	if [ -e $(key_path) ]; then \

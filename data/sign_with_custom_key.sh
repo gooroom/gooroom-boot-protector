@@ -42,14 +42,14 @@ for pkg in "${pkgs[@]}"; do
 done
 
 GRUBX64=/boot/efi/EFI/gooroom/grubx64.efi
-VMLINUZ=/boot/vmlinuz-4.9.0-9-amd64
-INITRD=/boot/initrd.img-4.9.0-9-amd64
-INITRD_RECOVERY=/boot/initrd.img-4.9.0-9-amd64-recovery
+VMLINUZ=/boot/vmlinuz-4.19.0-5-amd64
+INITRD=/boot/initrd.img-4.19.0-5-amd64
+INITRD_RECOVERY=/boot/initrd.img-4.19.0-5-amd64-recovery
 GRUBCFG=/boot/grub/grub.cfg
 
-GPG_KEY_FILE=$KEY_PATH/gooroom-1.0-secret-key.gpg
+GPG_KEY_FILE=$KEY_PATH/gooroom-2.0-secret-key.gpg
+#BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-keyring-2.0.gpg
 BOOT_KEY_FILE=$KEY_PATH/boot.key
-#BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-keyring-1.0.gpg
 
 #
 ## Create PK.auth, KEK.auth and db.auth
@@ -126,6 +126,19 @@ gpg --export > ${BOOT_KEY_FILE}
 echo -e "=============================================================="
 echo -e "### Create ${GRUBX64}.unsigned ####"
 echo -e "=============================================================="
+
+echo "grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \n
+                  --output ${GRUBX64}.unsigned \n
+                  --fonts="/boot/grub/fonts/gooroom-font.pf2" \n
+                  --format x86_64-efi \n
+                  --pubkey ${BOOT_KEY_FILE} \n
+                  --install-modules="" \n
+                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search lvm help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi tpm verify gcry_rsa test echo zfs xfs ufs2 ufs1_be ufs1 udf squash4 sfs romfs reiserfs odc ntfs nilfs2 newc minix_be minix3_be minix3 minix2_be minix2 minix jfs iso9660 hfsplus hfs exfat cpio_be cpio cbfs bfs afs affs crypto gcry_sha256 gcry_sha512" \n
+                    "themes/background/gooroom_bg_17_logo.png=/usr/lib/grub/x86_64-efi/themes/background/gooroom_bg_17_logo.png" \n
+                    "themes/warningimages/verified_boot_fail.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_fail.png" \n
+                    "themes/warningimages/verified_boot_config_error.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_config_error.png" \n
+                    "boot/grub/fonts/gooroom-font.pf2=/boot/grub/fonts/gooroom-font.pf2" \n
+                    "boot/grub/grub.cfg=/usr/lib/grub/x86_64-efi/grubconf/embedded.cfg""
 
 # Create ./.grubx64.efi
 grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \

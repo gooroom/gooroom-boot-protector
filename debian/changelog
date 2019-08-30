@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.4.2+4.19.37~5+deb10u2+grm2u2) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [a133e45c] Rebuild for changing background image
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 30 Aug 2019 17:51:47 +0900
+
 gooroom-boot-protector (0.4.2+4.19.37~5+deb10u2+grm2u1) gooroom-1.0; urgency=medium
 
   [ jongkyung.woo ]

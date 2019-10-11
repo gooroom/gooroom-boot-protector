@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.4.2+4.19.67~2+deb10u1+grm2u2) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [b4b1bb1b] Released kernel 0.4.2+4.19.67-2+deb10u1+grm2u1
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 11 Oct 2019 18:02:41 +0900
+
 gooroom-boot-protector (0.4.2+4.19.37~5+deb10u2+grm2u2) gooroom-1.0; urgency=medium
 
   [ jongkyung.woo ]

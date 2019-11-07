@@ -102,7 +102,7 @@ echo "grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \n
                   --pubkey ${BOOT_KEY_FILE} \n
                   --install-modules="" \n
                   --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search lvm help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi tpm verify gcry_rsa test echo zfs xfs ufs2 ufs1_be ufs1 udf squash4 sfs romfs reiserfs odc ntfs nilfs2 newc minix_be minix3_be minix3 minix2_be minix2 minix jfs iso9660 hfsplus hfs exfat cpio_be cpio cbfs bfs afs affs crypto gcry_sha256 gcry_sha512" \n
-                    "themes/background/gooroom_bg_17_logo.png=/usr/lib/grub/x86_64-efi/themes/background/gooroom_bg_17_logo.png" \n
+                    "themes/background/gooroom_grub_background_logo.png=/usr/lib/grub/x86_64-efi/themes/background/gooroom_grub_background_logo.png" \n
                     "themes/warningimages/verified_boot_fail.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_fail.png" \n
                     "themes/warningimages/verified_boot_config_error.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_config_error.png" \n
                     "boot/grub/fonts/gooroom-font.pf2=/boot/grub/fonts/gooroom-font.pf2" \n
@@ -116,7 +116,7 @@ grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \
                   --pubkey ${BOOT_KEY_FILE} \
                   --install-modules="" \
                   --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search lvm help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi tpm verify gcry_rsa test echo zfs xfs ufs2 ufs1_be ufs1 udf squash4 sfs romfs reiserfs odc ntfs nilfs2 newc minix_be minix3_be minix3 minix2_be minix2 minix jfs iso9660 hfsplus hfs exfat cpio_be cpio cbfs bfs afs affs crypto gcry_sha256 gcry_sha512" \
-                    "themes/background/gooroom_bg_17_logo.png=/usr/lib/grub/x86_64-efi/themes/background/gooroom_bg_17_logo.png" \
+                    "themes/background/gooroom_grub_background_logo.png=/usr/lib/grub/x86_64-efi/themes/background/gooroom_grub_background_logo.png" \
                     "themes/warningimages/verified_boot_fail.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_fail.png" \
                     "themes/warningimages/verified_boot_config_error.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_config_error.png" \
                     "boot/grub/fonts/gooroom-font.pf2=/boot/grub/fonts/gooroom-font.pf2" \

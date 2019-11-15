@@ -31,7 +31,7 @@ cp /usr/share/gooroom/security/gooroom-boot-protector/grubx64.efi /boot/efi/EFI/
 mount -oremount ro /boot/efi
 
 # Check if the gep package is installed
-dpkg -l | grep gooroom-exe-protector
+dpkg -l | grep -q gooroom-exe-protector
 if [ $? -eq 0 ]; then
   # ima_appraise=enforce
   cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima /boot/grub/grub.cfg
@@ -44,7 +44,7 @@ fi
 
 cp /usr/share/gooroom/security/gooroom-boot-protector/vmlinuz-* /boot/
 
-dpkg -l | grep gooroom-recovery-utils
+dpkg -l | grep -q gooroom-recovery-utils
 if [ $? -eq 0 ]; then
   cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-*-amd64-recovery \
      /boot/initrd.img-$(uname -r)

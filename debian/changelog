@@ -1,0 +1,210 @@
+gooroom-boot-protector (0.4.2+4.19.67~2+deb10u2+grm2u2) gooroom-2.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [fd354e27] Released 4.19.67-2+deb10u2+grm2u1
+  * [5993f592] Modified copyright
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 29 Nov 2019 09:32:18 +0900
+
+gooroom-boot-protector (0.4.2+4.19.67~2+deb10u2+grm2u1) gooroom-2.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [1f16a96f] Released 4.19.67-2+deb10u2+grm2u1
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 15 Nov 2019 20:23:48 +0900
+
+gooroom-boot-protector (0.4.2+4.19.67~2+deb10u1+grm2u3) gooroom-2.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [95fc0114] Released 0.4.2+4.19.67_2+deb10u1+grm2u3
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 08 Nov 2019 17:35:12 +0900
+
+gooroom-boot-protector (0.4.2+4.19.67~2+deb10u1+grm2u2) gooroom-2.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [cfe28331] Released kernel 0.4.2+4.19.67-2+deb10u1+grm2u1
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 23 Oct 2019 11:51:49 +0900
+
+gooroom-boot-protector (0.4.2+4.19.67~2+deb10u1+grm2u1) gooroom-2.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [b4b1bb1b] Released kernel 0.4.2+4.19.67-2+deb10u1+grm2u1
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 11 Oct 2019 18:02:41 +0900
+
+gooroom-boot-protector (0.4.2+4.19.37~5+deb10u2+grm2u2) gooroom-2.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [a133e45c] Rebuild for changing background image
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 30 Aug 2019 17:51:47 +0900
+
+gooroom-boot-protector (0.4.2+4.19.37~5+deb10u2+grm2u1) gooroom-2.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [9673aab9] Released kernel 4.19.0-5 (4.19.37-5+deb10u2+grm2u1)
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 30 Aug 2019 16:09:55 +0900
+
+gooroom-boot-protector (0.4.1+4.9.168~1+deb9u3+grm1u1) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [6d604948] Updated kernel 4.9.0-9-amd64 and 4.9.168-1+deb9u3+grm1u1
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 27 Jun 2019 15:18:42 +0900
+
+gooroom-boot-protector (0.4.1+4.9.110~3+deb9u6+grm1u2) gooroom-1.0; urgency=medium
+
+  [ gooroom ]
+  * [0525b1f1] Change log formats
+
+  [ jongkyung.woo ]
+  * [3ca49c93] Released kernel 4.9.110-3+deb9u6+grm1u2
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 26 Nov 2018 19:41:17 +0900
+
+gooroom-boot-protector (0.3.1+4.9.110~3+deb9u4+grm1u2) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [656d9138] Rebuild on gooroom-grub 2.02~beta3-5+grm1u6
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 12 Oct 2018 19:11:58 +0900
+
+gooroom-boot-protector (0.3.1+4.9.110~3+deb9u4+grm1u1) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [cab54980] Modified sign algorithm to sha256
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 11 Oct 2018 12:11:06 +0900
+
+gooroom-boot-protector (0.2.1+4.9.110~3+deb9u4+grm1u1) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [3f533ef6] Updated kernel 4.9.0-8-amd64 and 4.9.110-3+deb9u4+grm1u1
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 19 Sep 2018 18:13:45 +0900
+
+gooroom-boot-protector (0.2.1+4.9.82~1+deb9u3+grm1u4) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [720924e2] set timeout=0 in grub.cfg
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 28 Jun 2018 14:14:53 +0900
+
+gooroom-boot-protector (0.2.1+4.9.82~1+deb9u3+grm1u3) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [21e6b275] Updated initrd.img-4.9.0-6-amd64 on DELL E5470
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Tue, 26 Jun 2018 20:00:31 +0900
+
+gooroom-boot-protector (0.2.1+4.9.82~1+deb9u3+grm1u2) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [f38af867] Supported Korean fonts (gooroom-font.pf2) in gooroom-grub menu
+  * [a876cbae] Updated initrd.img-4.9.0-6-amd64 on NT500R3W-LD2A
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 16 May 2018 11:37:52 +0900
+
+gooroom-boot-protector (0.2.1+4.9.82~1+deb9u3+grm1u1) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [8dfbe76b] Added a process that check gooroom-recovery-utils in initrd.img
+  * [b82ba3bf] Added a DER format files to packages for secureboot of OVMF
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 09 May 2018 16:20:23 +0900
+
+gooroom-boot-protector (0.1.1+4.9.82~1+deb9u3+grm1u3) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [585a21ba] Remove pti=off at gooroom-os-protector 2.0.0 and later
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 16 Apr 2018 18:13:42 +0900
+
+gooroom-boot-protector (0.1.1+4.9.82~1+deb9u3+grm1u2) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [20ac7b5d] Added pti=off parameter as an emergency patch for the os-protector
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 19 Mar 2018 16:17:05 +0900
+
+gooroom-boot-protector (0.1.1+4.9.82~1+deb9u3+grm1u1) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [6822ead0] Released 4.9.82-1+deb9u3_grm1u1 (4.9.0-6)
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 08 Mar 2018 14:34:43 +0900
+
+gooroom-boot-protector (0.1.1+4.9.65~3+deb9u2+grm1u1) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [948ee634] Released 4.9.65-3+deb9u2_grm1u1 (4.9.0-5)
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Tue, 16 Jan 2018 16:45:13 +0900
+
+gooroom-boot-protector (0.1.1+4.9.30~2+deb9u5+grm1u2) gooroom-1.0; urgency=medium
+
+  * UNRELEASED
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Sun, 03 Dec 2017 09:35:32 +0900
+
+gooroom-boot-protector (0.1.1+4.9.30~2+deb9u5+grm1u1) gooroom-1.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [b0424b6d] Added to check the location of the build server's key directory
+  * [9daf060b] Fixed build errors on the build server
+  * [dec9c753] gooroom-exe-protector update to check when installing package
+  * [3b95742b] Released 4.9.30-2+deb9u5+grm1u1
+  * [f89e4748] Set the timeout to 5 and support GRM_RECOVERY mode
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 16 Nov 2017 17:49:25 +0900
+
+gooroom-boot-protector (0.1.0) gooroom-1.0; urgency=medium
+
+  * Initial Release.
+
+ -- jongkyung.woo <jkwoo@gooroom.kr>  Thu, 12 Oct 2017 10:10:47 +0900

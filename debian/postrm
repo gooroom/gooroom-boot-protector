@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Restore legacy grubx64.efi
+if [ -e /boot/efi/EFI/gooroom/grubx64.efi.legacy ]; then
+    mount -oremount rw /boot/efi
+    mv /boot/efi/EFI/gooroom/grubx64.efi.legacy /boot/efi/EFI/gooroom/grubx64.efi
+    mount -oremount ro /boot/efi
+fi

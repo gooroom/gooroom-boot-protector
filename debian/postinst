@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# Install daemon
+cp /usr/share/gooroom/security/gooroom-boot-protector/gbp-daemon /etc/init.d
+update-rc.d gbp-daemon defaults
+
+# Set update_initramfs to no
+sed -i -e "s@update_initramfs=yes@update_initramfs=no@g" /etc/initramfs-tools/update-initramfs.conf
+
+#
+# remount rw (Gooroom 2.0)
+#
+mount -oremount rw /boot/efi
+
+# - Update key files
+cp /usr/share/gooroom/security/gooroom-boot-protector/KEK.auth /boot/efi/EFI
+cp /usr/share/gooroom/security/gooroom-boot-protector/PK.auth /boot/efi/EFI
+cp /usr/share/gooroom/security/gooroom-boot-protector/db.auth /boot/efi/EFI
+
+# - Backup grubx64.efi
+if [ ! -e /boot/efi/EFI/gooroom/grubx64.efi.legacy ]; then
+  mv /boot/efi/EFI/gooroom/grubx64.efi /boot/efi/EFI/gooroom/grubx64.efi.legacy
+fi
+
+# - Update grubx64.signed to grubx64.efi
+cp /usr/share/gooroom/security/gooroom-boot-protector/grubx64.efi /boot/efi/EFI/gooroom
+
+#
+# remount ro
+#
+mount -oremount ro /boot/efi
+
+# Check if the gep package is installed
+dpkg -l | grep -q gooroom-exe-protector
+if [ $? -eq 0 ]; then
+  # ima_appraise=enforce
+  cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima /boot/grub/grub.cfg
+  cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima.sig /boot/grub/grub.cfg.sig
+else
+  # ima=off
+  cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg /boot/grub
+  cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.sig /boot/grub
+fi
+
+cp /usr/share/gooroom/security/gooroom-boot-protector/vmlinuz-* /boot/
+
+dpkg -l | grep -q gooroom-recovery-utils
+if [ $? -eq 0 ]; then
+  cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-*-amd64-recovery \
+     /boot/initrd.img-$(uname -r)
+  cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-*-amd64-recovery.sig \
+     /boot/initrd.img-$(uname -r).sig
+else
+  cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-*-amd64 /boot/
+  cp /usr/share/gooroom/security/gooroom-boot-protector/initrd.img-*-amd64.sig /boot/
+fi

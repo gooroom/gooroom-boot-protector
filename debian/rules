@@ -10,6 +10,7 @@ key_path=/var/lib/jenkins/$(jenkins_dir)
 target_dir=/debian/gooroom-boot-protector
 build_dir=$(CURDIR)
 gpg_key=gooroom-2.0-secret-key.gpg
+ima_debug_cfg=grub.cfg.ima-debug
 
 %:
 	dh $@
@@ -18,6 +19,10 @@ override_dh_auto_build:
 	# grub.cfg
 	cp $(build_dir)/data/grub.cfg $(build_dir)/grub.cfg
 	cp $(build_dir)/data/grub.cfg.ima $(build_dir)/grub.cfg.ima
+
+	# grub.cfg.ima-debug (ima_appraise=log)
+	cp $(build_dir)/data/grub.cfg.ima $(build_dir)/$(ima_debug_cfg)
+	sed -i -e 's/ima_appraise=enforce/ima_appraise=log/g' $(build_dir)/$(ima_debug_cfg)
 
 	# import keys
 	gpg --homedir=$(build_dir) --allow-secret-key-import --import $(key_path)/$(gpg_key)
@@ -42,6 +47,7 @@ override_dh_auto_build:
 
 	gpg --homedir=$(build_dir) -v --digest-algo sha256 --detach-sign $(build_dir)/grub.cfg
 	gpg --homedir=$(build_dir) -v --digest-algo sha256 --detach-sign $(build_dir)/grub.cfg.ima
+	gpg --homedir=$(build_dir) -v --digest-algo sha256 --detach-sign $(build_dir)/$(ima_debug_cfg)
 
 	# create db.sig from db.auth
 	dd bs=1 skip=1425 if=$(key_path)/db.auth of=$(build_dir)/tmp_dbdata
@@ -60,6 +66,10 @@ override_dh_install:
 	# grub.cfg.ima (ima_appraise=enforce)
 	cp $(build_dir)/grub.cfg.ima $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 	cp $(build_dir)/grub.cfg.ima.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+
+	# grub.cfg.ima-debug (ima_appraise=log)
+	cp $(build_dir)/grub.cfg.ima-debug $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
+	cp $(build_dir)/grub.cfg.ima-debug.sig $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
 	# gbp-daemon
 	cp $(build_dir)/data/gbp-daemon $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/

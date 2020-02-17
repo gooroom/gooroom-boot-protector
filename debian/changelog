@@ -1,3 +1,14 @@
+gooroom-boot-protector (0.4.3+4.19.67~2+deb10u2+grm2u2) gooroom-2.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [f00df9cc] Added ima_appraise=log at grub.cfg.img-debug
+  * [8b4efc74] Updated grub.cfg
+  * [443d8a01] Released 0.4.3+4.19.67_2+deb10u2+grm2u2
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 17 Feb 2020 09:42:32 +0900
+
 gooroom-boot-protector (0.4.2+4.19.67~2+deb10u2+grm2u2) gooroom-2.0; urgency=medium
 
   [ jongkyung.woo ]

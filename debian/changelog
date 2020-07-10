@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.4.3+4.19.118~2+deb10u1+grm2u1) gooroom-2.0; urgency=medium
+
+  [ jongkyung.woo ]
+  * [e1be8351] Released Version 0.4.3+4.19.118_2+deb10u1+grm2u1
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 10 Jul 2020 18:14:07 +0900
+
 gooroom-boot-protector (0.4.3+4.19.67~2+deb10u2+grm2u2) gooroom-2.0; urgency=medium
 
   [ jongkyung.woo ]

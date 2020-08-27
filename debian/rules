@@ -8,7 +8,7 @@ jenkins_dir=build_keystore/boot-protector
 key_path=/var/lib/jenkins/$(jenkins_dir)
 target_dir=/debian/gooroom-boot-protector
 build_dir=$(CURDIR)
-gpg_key=gooroom-2.0-secret-key.gpg
+gpg_key=gooroom-1.0-secret-key.gpg
 ima_debug_cfg=grub.cfg.ima-debug
 
 %:

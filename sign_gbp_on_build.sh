@@ -46,8 +46,8 @@ done
 GRUBX64=./grubx64.efi
 GRUBCFG=./grub.cfg
 
-GPG_KEY_FILE=$KEY_PATH/gooroom-2.0-secret-key.gpg
-BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-archive-2.0.gpg
+GPG_KEY_FILE=$KEY_PATH/gooroom-1.0-secret-key.gpg
+BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-archive-1.0.gpg
 #BOOT_KEY_FILE=$KEY_PATH/boot.key
 
 #

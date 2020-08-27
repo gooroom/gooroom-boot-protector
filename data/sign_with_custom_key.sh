@@ -47,7 +47,7 @@ INITRD=/boot/initrd.img-4.9.0-12-amd64
 INITRD_RECOVERY=/boot/initrd.img-4.9.0-12-amd64-recovery
 GRUBCFG=/boot/grub/grub.cfg
 
-GPG_KEY_FILE=$KEY_PATH/gooroom-2.0-secret-key.gpg
+GPG_KEY_FILE=$KEY_PATH/gooroom-1.0-secret-key.gpg
 #BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-keyring-2.0.gpg
 BOOT_KEY_FILE=$KEY_PATH/boot.key
 

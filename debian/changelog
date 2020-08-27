@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.5.0+4.19.118~2+deb10u1+grm2u2) stable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [e0a42d55] Add reboot option for Samsung Notebook
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 27 Aug 2020 17:27:22 +0900
+
 gooroom-boot-protector (0.5.0+4.19.118~2+deb10u1+grm2u1) stable; urgency=medium
 
   [ jongkyung.woo ]

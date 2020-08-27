@@ -1,3 +1,13 @@
+gooroom-boot-protector (0.5.0+4.9.189~3+deb9u1+grm1u2) stable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [934b3f48] Released Version Gooroom 1.6
+  * [1c347744] Add reboot option for Samsung Notebook
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 28 Aug 2020 02:50:11 +0900
+
 gooroom-boot-protector (0.5.0+4.9.189~3+deb9u1+grm1u1) stable; urgency=medium
 
   [ jongkyung.woo ]

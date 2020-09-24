@@ -4,7 +4,7 @@
 #export DH_VERBOSE = 1
 
 kernel_abi=4.19.0-9
-gooroom_codename=gooroom-2.0
+gooroom_codename=mofa-2.0
 jenkins_dir=build_keystore/$(gooroom_codename)/boot-protector
 key_path=/var/lib/jenkins/$(jenkins_dir)
 target_dir=/debian/gooroom-boot-protector

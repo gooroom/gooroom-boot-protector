@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.5.0+4.19.152~1+grm2u1) stable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [16fa3d26] Released Version 0.5.0+4.19.152-1+grm2u1
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 02 Nov 2020 16:42:47 +0900
+
 gooroom-boot-protector (0.5.0+4.19.118~2+deb10u1+grm2u2) stable; urgency=medium
 
   [ jongkyung.woo ]

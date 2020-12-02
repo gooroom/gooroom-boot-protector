@@ -1,3 +1,10 @@
+gooroom-boot-protector (0.5.0+4.19.152~1+grm2u2+kepco01) stable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [cc82c63a] Released gooroom/0.5.0+4.19.152_1+grm2u2 on kepco-2.0
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 02 Dec 2020 17:12:41 +0900
+
 gooroom-boot-protector (0.5.0+4.19.152~1+grm2u2) stable; urgency=medium
 
   [ jongkyung.woo ]

@@ -1,3 +1,10 @@
+gooroom-boot-protector (0.5.0+5.10.46~4+bpo10+1+grm2u1) stable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [b1cbab45] Released Version 0.5.0+5.10.46-4~bpo10+1+grm2u1 (5.10.0-0.bpo.8)
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 20 Oct 2021 12:07:35 +0900
+
 gooroom-boot-protector (0.5.0+5.10.13~1+bpo10+1+grm2u1) stable; urgency=medium
 
   [ jongkyung.woo ]

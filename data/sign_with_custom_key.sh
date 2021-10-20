@@ -42,9 +42,9 @@ for pkg in "${pkgs[@]}"; do
 done
 
 GRUBX64=/boot/efi/EFI/gooroom/grubx64.efi
-VMLINUZ=/boot/vmlinuz-5.10.0-0.bpo.3-amd64
-INITRD=/boot/initrd.img-5.10.0-0.bpo.3-amd64
-INITRD_RECOVERY=/boot/initrd.img-5.10.0-0.bpo.3-amd64-recovery
+VMLINUZ=/boot/vmlinuz-5.10.0-0.bpo.8-amd64
+INITRD=/boot/initrd.img-5.10.0-0.bpo.8-amd64
+INITRD_RECOVERY=/boot/initrd.img-5.10.0-0.bpo.8-amd64-recovery
 GRUBCFG=/boot/grub/grub.cfg
 
 GPG_KEY_FILE=$KEY_PATH/gooroom-2.0-secret-key.gpg

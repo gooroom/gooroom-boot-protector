@@ -42,12 +42,12 @@ for pkg in "${pkgs[@]}"; do
 done
 
 GRUBX64=/boot/efi/EFI/gooroom/grubx64.efi
-VMLINUZ=/boot/vmlinuz-5.10.0-0.bpo.8-amd64
-INITRD=/boot/initrd.img-5.10.0-0.bpo.8-amd64
-INITRD_RECOVERY=/boot/initrd.img-5.10.0-0.bpo.8-amd64-recovery
+VMLINUZ=/boot/vmlinuz-5.10.0-15-amd64
+INITRD=/boot/initrd.img-5.10.0-15-amd64
+INITRD_RECOVERY=/boot/initrd.img-5.10.0-15-amd64-recovery
 GRUBCFG=/boot/grub/grub.cfg
 
-GPG_KEY_FILE=$KEY_PATH/gooroom-2.0-secret-key.gpg
+GPG_KEY_FILE=$KEY_PATH/gooroom-3.0-secret-key.gpg
 #BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-keyring-2.0.gpg
 BOOT_KEY_FILE=$KEY_PATH/boot.key
 
@@ -129,29 +129,26 @@ echo -e "=============================================================="
 
 echo "grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \n
                   --output ${GRUBX64}.unsigned \n
-                  --fonts="/boot/grub/fonts/gooroom-font.pf2" \n
+                  --fonts="unicode" \n
                   --format x86_64-efi \n
                   --pubkey ${BOOT_KEY_FILE} \n
                   --install-modules="" \n
-                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search lvm help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi tpm verify gcry_rsa test echo zfs xfs ufs2 ufs1_be ufs1 udf squash4 sfs romfs reiserfs odc ntfs nilfs2 newc minix_be minix3_be minix3 minix2_be minix2 minix jfs iso9660 hfsplus hfs exfat cpio_be cpio cbfs bfs afs affs crypto gcry_sha256 gcry_sha512" \n
+                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi gcry_rsa test echo squash4 iso9660 exfat cpio_be cpio crypto gcry_sha256 gcry_sha512 tpm" \n
                     "themes/background/gooroom_grub_background_logo.png=/usr/lib/grub/x86_64-efi/themes/background/gooroom_grub_background_logo.png" \n
                     "themes/warningimages/verified_boot_fail.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_fail.png" \n
                     "themes/warningimages/verified_boot_config_error.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_config_error.png" \n
-                    "boot/grub/fonts/gooroom-font.pf2=/boot/grub/fonts/gooroom-font.pf2" \n
                     "boot/grub/grub.cfg=/usr/lib/grub/x86_64-efi/grubconf/embedded.cfg""
 
 # Create ./.grubx64.efi
 grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \
                   --output ${GRUBX64}.unsigned \
-                  --fonts="/boot/grub/fonts/gooroom-font.pf2" \
+                  --fonts="unicode" \
                   --format x86_64-efi \
                   --pubkey ${BOOT_KEY_FILE} \
                   --install-modules="" \
-                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search lvm help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi tpm verify gcry_rsa test echo zfs xfs ufs2 ufs1_be ufs1 udf squash4 sfs romfs reiserfs odc ntfs nilfs2 newc minix_be minix3_be minix3 minix2_be minix2 minix jfs iso9660 hfsplus hfs exfat cpio_be cpio cbfs bfs afs affs crypto gcry_sha256 gcry_sha512" \
-                    "themes/background/gooroom_grub_background_logo.png=/usr/lib/grub/x86_64-efi/themes/background/gooroom_grub_background_logo.png" \
+                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi gcry_rsa test echo squash4 iso9660 exfat cpio_be cpio crypto gcry_sha256 gcry_sha512 tpm" \
                     "themes/warningimages/verified_boot_fail.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_fail.png" \
                     "themes/warningimages/verified_boot_config_error.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_config_error.png" \
-                    "boot/grub/fonts/gooroom-font.pf2=/boot/grub/fonts/gooroom-font.pf2" \
                     "boot/grub/grub.cfg=/usr/lib/grub/x86_64-efi/grubconf/embedded.cfg"
 
 echo -e "================================================"

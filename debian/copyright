@@ -3,11 +3,11 @@ Upstream-Name: gooroom-boot-protector
 Source: https://github.com/gooroom-boot-protector
 
 Files: *
-Copyright: 2017 gooroom <gooroom@gooroom.kr>
+Copyright: 2017-2022 gooroom <gooroom@gooroom.kr>
 License: GPL-2.0+
 
 Files: debian/*
-Copyright: 2017 gooroom <gooroom@gooroom.kr>
+Copyright: 2017-2022 gooroom <gooroom@gooroom.kr>
 License: GPL-2.0+
 
 License: GPL-2.0+

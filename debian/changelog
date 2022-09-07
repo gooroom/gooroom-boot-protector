@@ -1,3 +1,10 @@
+gooroom-boot-protector (0.5.0+5.10.120~1+grm3u3) stable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [c8657e41] Released Version 0.5.0+5.10.120_1+grm3u3 (5.10.120-1+grm3u2)
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 07 Sep 2022 16:52:33 +0900
+
 gooroom-boot-protector (0.5.0+5.10.120~1+grm3u2) stable; urgency=medium
 
   [ jongkyung.woo ]

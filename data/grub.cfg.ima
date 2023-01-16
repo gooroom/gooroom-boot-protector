@@ -52,28 +52,28 @@ menuentry 'Gooroom 3.0' --class gooroom --class gnu-linux --class gnu --class os
 	insmod part_gpt
 	insmod ext2
 	search --no-floppy --label --set=root GRM_ROOT_VOL
-	linuxefi /boot/vmlinuz-5.10.0-15-amd64 root=LABEL=GRM_ROOT_VOL ro splash quiet reboot=w,a,f iommu=force intel_iommu=on ima_appraise=enforce
-	initrdefi /boot/initrd.img-5.10.0-15-amd64
+	linuxefi /boot/vmlinuz-5.10.0-17-amd64 root=LABEL=GRM_ROOT_VOL ro splash quiet reboot=w,a,f iommu=force intel_iommu=on ima_appraise=enforce
+	initrdefi /boot/initrd.img-5.10.0-17-amd64
 }
 submenu 'Gooroom 3.0 Advanced' $menuentry_id_option 'gnulinux-advanced-5242076a-dd9a-42d0-b65c-7e17bedd4eae' {
-	menuentry 'Gooroom 3.0, with Linux 5.10.0-15-amd64' --class gooroom --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.10.0-15-amd64-advanced-5242076a-dd9a-42d0-b65c-7e17bedd4eae' {
+	menuentry 'Gooroom 3.0, with Linux 5.10.0-17-amd64' --class gooroom --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.10.0-17-amd64-advanced-5242076a-dd9a-42d0-b65c-7e17bedd4eae' {
 		load_video
 		insmod gzio
 		if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi
 		insmod part_gpt
 		insmod ext2
 		search --no-floppy --label --set=root GRM_ROOT_VOL
-		linuxefi /boot/vmlinuz-5.10.0-15-amd64 root=LABEL=GRM_ROOT_VOL ro splash quiet reboot=w,a,f iommu=force intel_iommu=on ima_appraise=enforce
-		initrdefi /boot/initrd.img-5.10.0-15-amd64
+		linuxefi /boot/vmlinuz-5.10.0-17-amd64 root=LABEL=GRM_ROOT_VOL ro splash quiet reboot=w,a,f iommu=force intel_iommu=on ima_appraise=enforce
+		initrdefi /boot/initrd.img-5.10.0-17-amd64
 	}
-	menuentry 'Gooroom 3.0, 5.10.0-15-amd64 (Recovery)' --class gooroom --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.10.0-15-amd64-recovery-5242076a-dd9a-42d0-b65c-7e17bedd4eae' {
+	menuentry 'Gooroom 3.0, 5.10.0-17-amd64 (Recovery)' --class gooroom --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.10.0-17-amd64-recovery-5242076a-dd9a-42d0-b65c-7e17bedd4eae' {
 		load_video
 		insmod gzio
 		if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi
 		insmod part_gpt
 		insmod ext2
 		search --no-floppy --label --set=root GRM_RECOVERY
-		linuxefi /boot/vmlinuz-5.10.0-15-amd64 root=LABEL=GRM_RECOVERY ro reboot=w,a,f iommu=force intel_iommu=on ima_appraise=enforce break=bottom
-		initrdefi /boot/initrd.img-5.10.0-15-amd64
+		linuxefi /boot/vmlinuz-5.10.0-17-amd64 root=LABEL=GRM_RECOVERY ro reboot=w,a,f iommu=force intel_iommu=on ima_appraise=enforce break=bottom
+		initrdefi /boot/initrd.img-5.10.0-17-amd64
 	}
 }

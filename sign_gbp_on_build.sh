@@ -58,8 +58,8 @@ done
 GRUBX64=./grubx64.efi
 GRUBCFG=./grub.cfg
 
-GPG_KEY_FILE=$KEY_PATH/gooroom-3.0-secret-key.gpg
-BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-archive-3.0.gpg
+GPG_KEY_FILE=$KEY_PATH/gooroom-4.0-secret-key.gpg
+BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-archive-4.0.gpg
 #BOOT_KEY_FILE=$KEY_PATH/boot.key
 
 #
@@ -81,7 +81,7 @@ if [ ! -e ${KEY_PATH}/db.key -o ! -e ${KEY_PATH}/db.crt ]; then
     # Create PK.auth
     echo -e ">>> create ${KEY_PATH}/PK.auth"
     openssl req -new -x509 -newkey rsa:2048 -subj "/CN=my PK/" \
-	        -keyout PK.key -out PK.crt -days 3650 -nodes -sha256
+	        -keyout PK.key -out PK.crt -days 36500 -nodes -sha256
     openssl x509 -outform DER -in PK.crt -out ${KEY_PATH}/PK.cer
     cert-to-efi-sig-list -g `uuidgen` PK.crt PK.esl
     sign-efi-sig-list -k PK.key -c PK.crt PK PK.esl ${KEY_PATH}/PK.auth
@@ -89,7 +89,7 @@ if [ ! -e ${KEY_PATH}/db.key -o ! -e ${KEY_PATH}/db.crt ]; then
     # Create KEK.auth
     echo -e ">>> create ${KEY_PATH}/KEK.auth"
     openssl req -new -x509 -newkey rsa:2048 -subj "/CN=my KEK/" \
-	        -keyout KEK.key -out KEK.crt -days 3650 -nodes -sha256
+	        -keyout KEK.key -out KEK.crt -days 36500 -nodes -sha256
     openssl x509 -outform DER -in KEK.crt -out ${KEY_PATH}/KEK.cer
     cert-to-efi-sig-list -g `uuidgen` KEK.crt KEK.esl
     sign-efi-sig-list -k PK.key -c PK.crt KEK KEK.esl ${KEY_PATH}/KEK.auth
@@ -97,7 +97,7 @@ if [ ! -e ${KEY_PATH}/db.key -o ! -e ${KEY_PATH}/db.crt ]; then
     # Create db.auth
     echo -e ">>> create ${KEY_PATH}/db.auth"
     openssl req -new -x509 -newkey rsa:2048 -subj "/CN=my db/" \
-	        -keyout ${KEY_PATH}/db.key -out ${KEY_PATH}/db.crt -days 3650 -nodes -sha256
+	        -keyout ${KEY_PATH}/db.key -out ${KEY_PATH}/db.crt -days 36500 -nodes -sha256
     openssl x509 -outform DER -in ${KEY_PATH}/db.crt -out ${KEY_PATH}/db.cer
     cert-to-efi-sig-list -g `uuidgen` ${KEY_PATH}/db.crt db.esl
     sign-efi-sig-list -k KEK.key -c KEK.crt db db.esl ${KEY_PATH}/db.auth

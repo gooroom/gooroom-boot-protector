@@ -3,13 +3,13 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
-kernel_abi=5.10.0-17
-gooroom_codename=gooroom-3.0
+kernel_abi=6.1.0-17
+gooroom_codename=gooroom-4.0
 jenkins_dir=build_keystore/$(gooroom_codename)/boot-protector
 key_path=/var/lib/jenkins/$(jenkins_dir)
 target_dir=/debian/gooroom-boot-protector
 build_dir=$(CURDIR)
-gpg_key=gooroom-3.0-secret-key.gpg
+gpg_key=gooroom-4.0-secret-key.gpg
 ima_debug_cfg=grub.cfg.ima-debug
 
 %:

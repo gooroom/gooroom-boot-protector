@@ -8,9 +8,14 @@ update-rc.d gbp-daemon defaults
 sed -i -e "s@update_initramfs=yes@update_initramfs=no@g" /etc/initramfs-tools/update-initramfs.conf
 
 #
-# remount rw (Gooroom 2.0)
+# remount rw
 #
-mount -oremount rw /boot/efi
+#- Enable FDE Features
+#_EFI_DIR=/boot
+#- Disable FDE Features
+_EFI_DIR=/boot/efi
+
+mount -oremount rw ${_EFI_DIR}
 
 # - Update key files
 cp /usr/share/gooroom/security/gooroom-boot-protector/KEK.auth /boot/efi/EFI
@@ -28,7 +33,7 @@ cp /usr/share/gooroom/security/gooroom-boot-protector/grubx64.efi /boot/efi/EFI/
 #
 # remount ro
 #
-mount -oremount ro /boot/efi
+mount -oremount ro ${_EFI_DIR}
 
 # Check if the gep package is installed
 dpkg -l | grep -q gooroom-exe-protector

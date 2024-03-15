@@ -54,13 +54,12 @@ for pkg in "${pkgs[@]}"; do
 done
 
 GRUBX64=/boot/efi/EFI/gooroom/grubx64.efi
-VMLINUZ=/boot/vmlinuz-5.10.0-17-amd64
-INITRD=/boot/initrd.img-5.10.0-17-amd64
-INITRD_RECOVERY=/boot/initrd.img-5.10.0-17-amd64-recovery
+VMLINUZ=/boot/vmlinuz-6.1.0-17-amd64
+INITRD=/boot/initrd.img-6.1.0-17-amd64
+INITRD_RECOVERY=/boot/initrd.img-6.1.0-17-amd64-recovery
 GRUBCFG=/boot/grub/grub.cfg
 
-GPG_KEY_FILE=$KEY_PATH/gooroom-3.0-secret-key.gpg
-#BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-keyring-2.0.gpg
+GPG_KEY_FILE=$KEY_PATH/gooroom-4.0-secret-key.gpg
 BOOT_KEY_FILE=$KEY_PATH/boot.key
 
 #
@@ -82,7 +81,7 @@ if [ ! -e ${KEY_PATH}/db.key -o ! -e ${KEY_PATH}/db.crt ]; then
     # Create PK.auth
     echo -e ">>> create PK.auth"
     openssl req -new -x509 -newkey rsa:2048 -subj "/CN=my PK/" \
-	        -keyout PK.key -out PK.crt -days 3650 -nodes -sha256
+	        -keyout PK.key -out PK.crt -days 36500 -nodes -sha256
     openssl x509 -outform DER -in PK.crt -out PK.cer
     cert-to-efi-sig-list -g `uuidgen` PK.crt PK.esl
     sign-efi-sig-list -k PK.key -c PK.crt PK PK.esl ${KEY_PATH}/PK.auth
@@ -90,7 +89,7 @@ if [ ! -e ${KEY_PATH}/db.key -o ! -e ${KEY_PATH}/db.crt ]; then
     # Create KEK.auth
     echo -e ">>> create KEK.auth"
     openssl req -new -x509 -newkey rsa:2048 -subj "/CN=my KEK/" \
-	        -keyout KEK.key -out KEK.crt -days 3650 -nodes -sha256
+	        -keyout KEK.key -out KEK.crt -days 36500 -nodes -sha256
     openssl x509 -outform DER -in KEK.crt -out KEK.cer
     cert-to-efi-sig-list -g `uuidgen` KEK.crt KEK.esl
     sign-efi-sig-list -k PK.key -c PK.crt KEK KEK.esl ${KEY_PATH}/KEK.auth
@@ -98,7 +97,7 @@ if [ ! -e ${KEY_PATH}/db.key -o ! -e ${KEY_PATH}/db.crt ]; then
     # Create db.auth
     echo -e ">>> create db.auth"
     openssl req -new -x509 -newkey rsa:2048 -subj "/CN=my db/" \
-	        -keyout db.key -out db.crt -days 3650 -nodes -sha256
+	        -keyout db.key -out db.crt -days 36500 -nodes -sha256
     openssl x509 -outform DER -in db.crt -out db.cer
     cert-to-efi-sig-list -g `uuidgen` db.crt db.esl
     sign-efi-sig-list -k KEK.key -c KEK.crt db db.esl ${KEY_PATH}/db.auth

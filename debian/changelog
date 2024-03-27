@@ -1,3 +1,10 @@
+gooroom-boot-protector (0.5.0+6.1.69~1+grm4u1) stable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [ea56b3bc] Rebased on gooroom-4.0
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 27 Mar 2024 16:33:41 +0900
+
 gooroom-boot-protector (0.5.0+5.10.136~1+grm3u1) stable; urgency=medium
 
   [ jongkyung.woo ]

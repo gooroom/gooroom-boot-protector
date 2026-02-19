@@ -54,12 +54,12 @@ for pkg in "${pkgs[@]}"; do
 done
 
 GRUBX64=/boot/efi/EFI/gooroom/grubx64.efi
-VMLINUZ=/boot/vmlinuz-6.1.0-17-amd64
-INITRD=/boot/initrd.img-6.1.0-17-amd64
-INITRD_RECOVERY=/boot/initrd.img-6.1.0-17-amd64-recovery
+VMLINUZ=/boot/vmlinuz-6.12.69+grm5-amd64
+INITRD=/boot/initrd.img-6.12.69+grm5-amd64
+INITRD_RECOVERY=/boot/initrd.img-6.12.69+grm5-amd64-recovery
 GRUBCFG=/boot/grub/grub.cfg
 
-GPG_KEY_FILE=$KEY_PATH/gooroom-4.0-secret-key.gpg
+GPG_KEY_FILE=$KEY_PATH/gooroom-5.0-secret-key.gpg
 BOOT_KEY_FILE=$KEY_PATH/boot.key
 
 #
@@ -144,7 +144,7 @@ echo "grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \n
                   --format x86_64-efi \n
                   --pubkey ${BOOT_KEY_FILE} \n
                   --install-modules="" \n
-                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi gcry_rsa test echo squash4 iso9660 exfat cpio_be cpio crypto gcry_sha256 gcry_sha512 tpm" \n
+                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linux gcry_rsa test echo squash4 iso9660 exfat cpio_be cpio crypto gcry_sha256 gcry_sha512 tpm" \n
                     "themes/background/gooroom_grub_background_logo.png=/usr/lib/grub/x86_64-efi/themes/background/gooroom_grub_background_logo.png" \n
                     "themes/warningimages/verified_boot_fail.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_fail.png" \n
                     "themes/warningimages/verified_boot_config_error.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_config_error.png" \n
@@ -157,7 +157,7 @@ grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \
                   --format x86_64-efi \
                   --pubkey ${BOOT_KEY_FILE} \
                   --install-modules="" \
-                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linuxefi gcry_rsa test echo squash4 iso9660 exfat cpio_be cpio crypto gcry_sha256 gcry_sha512 tpm" \
+                  --modules="boot part_gpt part_msdos fat ext2 normal configfile lspci ls reboot datetime time loadenv search help gfxmenu gfxterm gfxterm_menu gfxterm_background all_video png gettext linux gcry_rsa test echo squash4 iso9660 exfat cpio_be cpio crypto gcry_sha256 gcry_sha512 tpm" \
                     "themes/warningimages/verified_boot_fail.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_fail.png" \
                     "themes/warningimages/verified_boot_config_error.png=/usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_config_error.png" \
                     "boot/grub/grub.cfg=/usr/lib/grub/x86_64-efi/grubconf/embedded.cfg"

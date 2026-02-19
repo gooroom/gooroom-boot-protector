@@ -58,8 +58,8 @@ done
 GRUBX64=./grubx64.efi
 GRUBCFG=./grub.cfg
 
-GPG_KEY_FILE=$KEY_PATH/gooroom-4.0-secret-key.gpg
-BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-archive-4.0.gpg
+GPG_KEY_FILE=$KEY_PATH/gooroom-5.0-secret-key.gpg
+BOOT_KEY_FILE=/etc/apt/trusted.gpg.d/gooroom-archive-5.0.gpg
 #BOOT_KEY_FILE=$KEY_PATH/boot.key
 
 #
@@ -120,6 +120,17 @@ echo "grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \n
                     "boot/grub/fonts/gooroom-font.pf2=/boot/grub/fonts/gooroom-font.pf2" \n
                     "boot/grub/grub.cfg=/usr/lib/grub/x86_64-efi/grubconf/embedded.cfg""
 
+# Check embedded source files (missing file = unbootable grubx64.efi)
+for f in /usr/lib/grub/x86_64-efi/themes/background/gooroom_grub_background_logo.png \
+         /usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_fail.png \
+         /usr/lib/grub/x86_64-efi/themes/warningimages/verified_boot_config_error.png \
+         /boot/grub/fonts/gooroom-font.pf2 \
+         /usr/lib/grub/x86_64-efi/grubconf/embedded.cfg; do
+    if [ ! -e $f ]; then
+        echo -e ">>> $f is not found. (gooroom-grub-efi-amd64-bin >= 2.12-9+grm5u2 required)"; exit 1
+    fi
+done
+
 # Create ./.grubx64.efi
 grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \
                   --output ${GRUBX64}.unsigned \
@@ -134,6 +145,10 @@ grub-mkstandalone --directory /usr/lib/grub/x86_64-efi \
                     "boot/grub/fonts/gooroom-font.pf2=/boot/grub/fonts/gooroom-font.pf2" \
                     "boot/grub/grub.cfg=/usr/lib/grub/x86_64-efi/grubconf/embedded.cfg"
 
+if [ $? -ne 0 -o ! -s ${GRUBX64}.unsigned ]; then
+    echo -e ">>> grub-mkstandalone failed."; exit 1
+fi
+
 echo -e "================================================"
 echo -e "### Sign ${GRUBX64} ####"
 echo -e "================================================"
@@ -141,6 +156,10 @@ echo -e "================================================"
 # When the build is completed in the rules file, copy db.crt and db.key to $KEY_PATH ($key_path in rules)
 echo -e ">>> sbsign --key ${KEY_PATH}/db.key --cert ${KEY_PATH}/db.crt --output ${GRUBX64}.signed ${GRUBX64}.unsigned"
 sbsign --key ${KEY_PATH}/db.key --cert ${KEY_PATH}/db.crt --output ${GRUBX64}.signed ${GRUBX64}.unsigned
+
+if [ $? -ne 0 -o ! -s ${GRUBX64}.signed ]; then
+    echo -e ">>> sbsign failed."; exit 1
+fi
 
 cp ${GRUBX64}.signed ${GRUBX64}
 echo -e "================================================"

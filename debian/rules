@@ -3,13 +3,13 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
-kernel_abi=6.1.0-17
-gooroom_codename=gooroom-4.0
+kernel_abi=6.12.86+grm5
+gooroom_codename=gooroom-5.0
 jenkins_dir=build_keystore/$(gooroom_codename)/boot-protector
 key_path=/var/lib/jenkins/$(jenkins_dir)
 target_dir=/debian/gooroom-boot-protector
 build_dir=$(CURDIR)
-gpg_key=gooroom-4.0-secret-key.gpg
+gpg_key=gooroom-5.0-secret-key.gpg
 ima_debug_cfg=grub.cfg.ima-debug
 
 %:
@@ -39,6 +39,13 @@ override_dh_auto_build:
 	cp $(key_path)/initrd.img-$(kernel_abi)-amd64 $(build_dir)/initrd.img-$(kernel_abi)-amd64
 	cp $(key_path)/initrd.img-$(kernel_abi)-amd64-recovery \
 	   $(build_dir)/initrd.img-$(kernel_abi)-amd64-recovery
+
+	# initrd must contain modules for $(kernel_abi) (stale keystore initrd = unbootable)
+	set -e ; \
+	for i in initrd.img-$(kernel_abi)-amd64 initrd.img-$(kernel_abi)-amd64-recovery; do \
+		lsinitramfs $(build_dir)/$$i | grep -q "lib/modules/$(kernel_abi)-amd64/kernel" \
+		  || { echo "ERROR: $$i has no modules for $(kernel_abi)"; exit 1; } ; \
+	done
 
 	# gpg signing
 	gpg --homedir=$(build_dir) -v --digest-algo sha256 --detach-sign $(build_dir)/vmlinuz-$(kernel_abi)-amd64

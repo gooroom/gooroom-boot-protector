@@ -1,3 +1,10 @@
+gooroom-boot-protector (0.5.0+6.12.86~1+grm5u1) unstable; urgency=medium
+
+  * Rebased on gooroom-5.0
+  * Version 0.5.0+6.1.69~1+grm4u1 released
+
+ -- gooroom <gooroom@gooroom.kr>  Mon, 06 Jul 2026 18:08:30 +0900
+
 gooroom-boot-protector (0.5.0+6.12.86~1+grm5~alpha1) unstable; urgency=medium
 
   * Rebased on gooroom-5.0

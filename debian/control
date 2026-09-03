@@ -16,6 +16,6 @@ Architecture: amd64
 Depends: gooroom-grub-common, 
          gooroom-grub-efi-amd64,
          gooroom-grub2-common,
-         linux-image-6.12.86+grm5-amd64 (= 6.12.86-1+grm5u1),
+         linux-image-6.12.94+grm5-amd64 (= 6.12.94-1+grm5u1),
 Description: Gooroom Platforom boot protection
  Gooroom Platform boot protection for secureboot and grub signature verification

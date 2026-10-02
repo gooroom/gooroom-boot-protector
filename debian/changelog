@@ -1,3 +1,9 @@
+gooroom-boot-protector (0.5.0+6.12.111~1+grm5u1) unstable; urgency=medium
+
+  * Update kernel to 6.12.111+grm5
+
+ -- jongkyung.woo <jkwoo@gooroom.kr>  Fri, 02 Oct 2026 12:33:48 +0900
+
 gooroom-boot-protector (0.5.0+6.12.107~1+grm5u1) unstable; urgency=medium
 
   * Update kernel to 6.12.107+grm5

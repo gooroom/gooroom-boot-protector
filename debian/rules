@@ -3,7 +3,7 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
-kernel_abi=6.12.107+grm5
+kernel_abi=6.12.111+grm5
 gooroom_codename=gooroom-5.0
 jenkins_dir=build_keystore/$(gooroom_codename)/boot-protector
 key_path=/var/lib/jenkins/$(jenkins_dir)
@@ -19,6 +19,12 @@ override_dh_auto_build:
 	# grub.cfg
 	cp $(build_dir)/data/grub.cfg $(build_dir)/grub.cfg
 	cp $(build_dir)/data/grub.cfg.ima $(build_dir)/grub.cfg.ima
+	# grub.cfg must boot the kernel this package signs
+	for f in grub.cfg grub.cfg.ima; do \
+		grep -q 'vmlinuz-$(kernel_abi)-amd64' $(build_dir)/$$f && \
+		grep -q 'initrd.img-$(kernel_abi)-amd64' $(build_dir)/$$f || \
+		{ echo "$$f does not boot $(kernel_abi)" >&2; exit 1; }; \
+	done
 
 	# grub.cfg.ima-debug (ima_appraise=log)
 	cp $(build_dir)/data/grub.cfg.ima $(build_dir)/$(ima_debug_cfg)

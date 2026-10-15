@@ -80,6 +80,10 @@ override_dh_install:
 	# gbp-daemon
 	cp $(build_dir)/data/gbp-daemon $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 
+	# kernel hook: restore the signed initrd and grub.cfg after kernel package hooks
+	install -D -m 0755 $(build_dir)/data/zzz-gooroom-boot-protector \
+	   $(build_dir)$(target_dir)/etc/kernel/postinst.d/zzz-gooroom-boot-protector
+
 	# auth key
 	cp $(key_path)/PK.auth $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/
 	cp $(key_path)/KEK.auth $(build_dir)$(target_dir)/usr/share/gooroom/security/gooroom-boot-protector/

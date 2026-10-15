@@ -1,0 +1,22 @@
+#!/bin/sh
+# gooroom-boot-protector: restore the signed boot files after kernel package hooks.
+# Kernel hooks regenerate the initrd (initramfs-tools runs "update-initramfs -c",
+# which ignores update_initramfs=no) and grub.cfg (zz-update-grub). They then no
+# longer match the detached signatures this package installs and the next boot
+# stops at the trusted boot failure screen, so put the signed copies back.
+# The zzz- name makes run-parts run this after initramfs-tools and zz-update-grub.
+version="$1"
+dir=/usr/share/gooroom/security/gooroom-boot-protector
+[ -n "$version" ] && [ -d "$dir" ] || exit 0
+
+restore() {  # $1 = signed copy shipped by this package, $2 = file used at boot
+  if [ -f "$1" ] && [ -f "$1.sig" ] && ! cmp -s "$1" "$2"; then
+    cp "$1" "$2" && cp "$1.sig" "$2.sig" && \
+      echo "gooroom-boot-protector: restored the signed $2" >&2
+  fi
+}
+
+restore "$dir/initrd.img-$version" "/boot/initrd.img-$version"
+if dpkg -l | grep -q gooroom-exe-protector; then cfg=grub.cfg.ima; else cfg=grub.cfg; fi
+restore "$dir/$cfg" /boot/grub/grub.cfg
+exit 0

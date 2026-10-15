@@ -1,0 +1,3 @@
+interest-noawait /usr/sbin/update-grub
+interest-noawait /usr/sbin/grub-mkconfig
+interest-noawait /etc/grub.d

@@ -1,5 +1,22 @@
 #!/bin/sh
 
+# - Restore the signed grub.cfg after grub files change (dpkg file triggers, debian/triggers)
+#   A grub package postinst runs update-grub and regenerates grub.cfg, which then no longer
+#   matches grub.cfg.sig and the next boot stops at the trusted boot failure screen.
+#   gooroom-grub (gooroom-0011) keeps the signed grub.cfg itself; this restores it for
+#   grub packages built before that change.
+if [ "$1" = "triggered" ]; then
+  if dpkg -l | grep -q gooroom-exe-protector; then
+    cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima /boot/grub/grub.cfg
+    cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima.sig /boot/grub/grub.cfg.sig
+  else
+    cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg /boot/grub
+    cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.sig /boot/grub
+  fi
+  echo "gooroom-boot-protector: restored the signed grub.cfg"
+  exit 0
+fi
+
 # Install daemon
 cp /usr/share/gooroom/security/gooroom-boot-protector/gbp-daemon /etc/init.d
 update-rc.d gbp-daemon defaults

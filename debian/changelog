@@ -1,3 +1,12 @@
+gooroom-boot-protector (0.5.1+6.12.111~1+grm5u1) unstable; urgency=medium
+
+  * [#1518] Restore the signed grub.cfg after GRUB package updates so Secure
+    Boot devices keep booting. (B-system #5718 cherry-pick)
+  * [#1521] Restore the signed initrd and grub.cfg after a kernel package is
+    installed so Secure Boot devices keep booting.
+
+ -- jongkyung.woo <jkwoo@gooroom.kr>  Fri, 16 Oct 2026 10:53:04 +0900
+
 gooroom-boot-protector (0.5.0+6.12.111~1+grm5u1) unstable; urgency=medium
 
   * [#1475] Update kernel to 6.12.111+grm5 and boot it from the signed grub.cfg

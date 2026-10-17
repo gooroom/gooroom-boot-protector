@@ -3,7 +3,7 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
-kernel_abi=6.12.111+grm5
+kernel_abi=6.12.111+grm5.1
 gooroom_codename=gooroom-5.0
 jenkins_dir=build_keystore/$(gooroom_codename)/boot-protector
 key_path=/var/lib/jenkins/$(jenkins_dir)

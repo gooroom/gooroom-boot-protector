@@ -1,3 +1,10 @@
+gooroom-boot-protector (0.5.2+6.12.111~1+grm5u1) unstable; urgency=medium
+
+  * [#1553] Ship signatures for the 6.12.111-1+grm5u2 kernel (ABI
+    6.12.111+grm5.1) and initrd, point grub.cfg at it, and depend on it.
+
+ -- jongkyung.woo <jkwoo@gooroom.kr>  Mon, 19 Oct 2026 14:36:35 +0900
+
 gooroom-boot-protector (0.5.1+6.12.111~1+grm5u1) unstable; urgency=medium
 
   * [#1518] Restore the signed grub.cfg after GRUB package updates so Secure

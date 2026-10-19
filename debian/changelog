@@ -1,3 +1,10 @@
+gooroom-boot-protector (0.5.2+6.1.187~1+grm4u1) unstable; urgency=medium
+
+  * [#1552] Ship signatures for the 6.1.187-1+grm4u2 kernel and initrd and
+    depend on that kernel.
+
+ -- jongkyung.woo <jkwoo@gooroom.kr>  Mon, 19 Oct 2026 11:23:16 +0900
+
 gooroom-boot-protector (0.5.1+6.1.187~1+grm4u1) unstable; urgency=medium
 
   * [#1519] Restore the signed grub.cfg after GRUB package updates so Secure

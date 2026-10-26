@@ -1,3 +1,11 @@
+gooroom-boot-protector (0.5.3+6.1.187~1+grm4u1) unstable; urgency=medium
+
+  * [rebuild] Ship an initrd that includes the gooroom-exe-protector boot
+    scripts, so executable protection works on devices that also use boot
+    protection.
+
+ -- jongkyung.woo <jkwoo@gooroom.kr>  Mon, 26 Oct 2026 13:51:36 +0900
+
 gooroom-boot-protector (0.5.2+6.1.187~1+grm4u1) unstable; urgency=medium
 
   * [#1552] Ship signatures for the 6.1.187-1+grm4u2 kernel and initrd and
